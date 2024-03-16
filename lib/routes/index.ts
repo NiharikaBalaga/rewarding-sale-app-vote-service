@@ -1,8 +1,8 @@
 import express from 'express';
-import passport from "passport";
-import {isBlocked, tokenBlacklist} from "../middlewares";
-import {newVote, validateErrors} from "./RequestValidations";
-import {VoteServiceController} from "../controller";
+import passport from 'passport';
+import { isBlocked, tokenBlacklist } from '../middlewares';
+import { newVote, validateErrors } from './RequestValidations';
+import { VoteServiceController } from '../controller';
 
 const router = express.Router();
 
@@ -13,10 +13,10 @@ function getRouter() {
   });
 
   // Get Votes
-  router.get('/api/vote', [passport.authenticate('jwt-access', { session: false }), isBlocked, tokenBlacklist, VoteServiceController.getVotes]);
+  router.get('', [passport.authenticate('jwt-access', { session: false }), isBlocked, tokenBlacklist, VoteServiceController.getVotes]);
 
   // Create Vote
-  router.post('/api/vote', [passport.authenticate('jwt-access', { session: false }), isBlocked, tokenBlacklist, newVote(), validateErrors, VoteServiceController.createVote]);
+  router.post('', [passport.authenticate('jwt-access', { session: false }), isBlocked, tokenBlacklist, newVote(), validateErrors, VoteServiceController.createVote]);
 
   return router;
 }

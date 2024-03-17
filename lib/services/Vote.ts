@@ -3,6 +3,8 @@ import VoteModel from '../DB/Models/Vote';
 import { httpCodes } from '../constants/http-status-code';
 import type { Response } from 'express';
 import { VoteStatus } from '../DB/Models/vote-status.enum';
+import UserModel from '../DB/Models/User';
+import PostModel from '../DB/Models/Post';
 
 class VoteService {
 
@@ -38,6 +40,28 @@ class VoteService {
       if (existingVote) {
         return res.status(httpCodes.conflict).send({
           message: 'You can\'t upvote a post more than once.',
+          status: httpCodes.conflict
+        });
+      }
+
+      // Check if the user id exists
+      const existingUser = await UserModel.findOne({ _id: voteObject.userId });
+      const existingPost = await PostModel.findOne({ _id: voteObject.postId });
+      if (!existingUser && !existingPost) {
+        return res.status(httpCodes.conflict).send({
+          message: 'The user and post doesn\'t exist in db, please check.',
+          status: httpCodes.conflict
+        });
+      }
+      if (!existingUser) {
+        return res.status(httpCodes.conflict).send({
+          message: 'The user doesn\'t exist in db, please check.',
+          status: httpCodes.conflict
+        });
+      }
+      if (!existingPost) {
+        return res.status(httpCodes.conflict).send({
+          message: 'The post doesn\'t exist in db, please check.',
           status: httpCodes.conflict
         });
       }

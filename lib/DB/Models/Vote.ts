@@ -23,12 +23,6 @@ const VoteSchema: mongoose.Schema = new mongoose.Schema({
     required: true,
     index: true,
   },
-
-  type: {
-    type: String,
-    default: 'upvote',
-  },
-
 }, {
   collection: 'Votes',
   timestamps: true,

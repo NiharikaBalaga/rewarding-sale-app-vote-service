@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express';
 import type { IUser } from '../DB/Models/User';
 import { VoteService } from '../services/Vote';
+import { matchedData } from 'express-validator';
 
 interface RequestValidatedByPassport extends Request {
   user: {
@@ -17,14 +18,22 @@ interface RequestInterferedByIsBlocked extends RequestValidatedByPassport {
 }
 
 class VoteServiceController {
-
-  public static getVotes(req: RequestInterferedByIsBlocked, res: Response) {
-    return VoteService.getVotes(res);
+  public static vote(req: RequestInterferedByIsBlocked, res: Response) {
+    const { matchedData: { postId } } = req.body;
+    const { currentUser }  = req;
+    return VoteService.vote(postId, currentUser, res);
   }
 
-  public static createVote(req: RequestInterferedByIsBlocked, res: Response) {
-    const { matchedData } = req.body;
-    return VoteService.createVote(matchedData, res);
+
+  public static postVoteCount(req: RequestInterferedByIsBlocked, res: Response) {
+    const { matchedData: { postId } } = req.body;
+    return VoteService.postVoteCount(postId, res);
+  }
+
+  public static userPostVote(req: RequestInterferedByIsBlocked, res: Response) {
+    const { matchedData: { postId } } = req.body;
+    const { currentUser }  = req;
+    return VoteService.userPostVote(postId, currentUser, res);
   }
 
 }

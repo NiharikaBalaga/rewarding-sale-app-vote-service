@@ -1,0 +1,16 @@
+### Vote a Post
+PATCH http://localhost:3005/api/vote/65f8d8de3e6366b7190153ce/vote
+content-type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY4ZDQ4N2Q1ZDQ1MTk0Mzg5NzNlNTEiLCJwaG9uZU51bWJlciI6IjQzNy01NTYtNDA2NiIsImlhdCI6MTcxMDgwNjE1MSwiZXhwIjoxNzEzMzk4MTUxfQ.ejzHSxPZr80o09g2UXinerDNq7cUrP3hO7Ere9m_1fM
+
+
+### Get Post Votes Count
+GET http://localhost:3005/api/vote/65f8d8de3e6366b7190153ce/votes/count
+content-type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY4ZDQ4N2Q1ZDQ1MTk0Mzg5NzNlNTEiLCJwaG9uZU51bWJlciI6IjQzNy01NTYtNDA2NiIsImlhdCI6MTcxMDgwNjE1MSwiZXhwIjoxNzEzMzk4MTUxfQ.ejzHSxPZr80o09g2UXinerDNq7cUrP3hO7Ere9m_1fM
+
+
+### User Vote On Post Details
+GET http://localhost:3005/api/vote/65f8d8de3e6366b7190153ce/user/vote
+content-type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWY4ZDQ4N2Q1ZDQ1MTk0Mzg5NzNlNTEiLCJwaG9uZU51bWJlciI6IjQzNy01NTYtNDA2NiIsImlhdCI6MTcxMDgwNjE1MSwiZXhwIjoxNzEzMzk4MTUxfQ.ejzHSxPZr80o09g2UXinerDNq7cUrP3hO7Ere9m_1fM

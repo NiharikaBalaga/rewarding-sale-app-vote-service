@@ -1,21 +1,15 @@
-import { body, matchedData, validationResult } from 'express-validator';
+import { matchedData, param, validationResult } from 'express-validator';
 import type { NextFunction, Request, Response } from 'express';
 import { httpCodes } from '../constants/http-status-code';
 
-const newVote = () => {
+const vote = () => {
   return [
-    body('userId')
+    param('postId')
       .trim()
       .notEmpty()
       .escape()
-      .isString()
-      .withMessage('User ID is required'),
-    body('postId')
-      .trim()
-      .escape()
-      .notEmpty()
-      .isString()
-      .withMessage('Post ID is required'),
+      .isMongoId()
+      .withMessage('Post Id is required'),
   ];
 };
 
@@ -33,4 +27,4 @@ const validateErrors = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-export { newVote, validateErrors };
+export { vote, validateErrors };

@@ -5,6 +5,7 @@ import type { IUser } from '../DB/Models/User';
 import PostModel from '../DB/Models/Post';
 import type mongoose from 'mongoose';
 import { PostStatus } from '../DB/Models/post-status.enum';
+import { SNSService } from './SNS';
 
 class VoteService {
   public static async vote(postId: mongoose.Types.ObjectId, user: IUser, res: Response) {
@@ -36,6 +37,10 @@ class VoteService {
         userId: user.id
       });
       await newVote.save();
+      console.log('VoteService newVote: ', newVote);
+      // SNS Event
+      SNSService.newVote(newVote);
+
       return res.status(httpCodes.ok).send({
         message: 'User Vote On Post Success'
       });
